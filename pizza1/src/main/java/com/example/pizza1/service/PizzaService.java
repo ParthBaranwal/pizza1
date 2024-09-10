@@ -1,5 +1,6 @@
 package com.example.pizza1.service;
 
+import com.example.pizza1.dto.PizzaDTO;
 import com.example.pizza1.entity.Pizza;
 import com.example.pizza1.repository.PizzaRepository;
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PizzaService {
@@ -18,25 +20,27 @@ public class PizzaService {
     @Autowired
     private PizzaRepository pizzaRepository;
 
-    public Pizza createPizza(Pizza pizza) {
+    public PizzaDTO createPizza(Pizza pizza) {
         try {
-            return pizzaRepository.save(pizza);
+            Pizza createdPizza = pizzaRepository.save(pizza);
+            return PizzaDTO.fromEntity(createdPizza);
         } catch (Exception e) {
             logger.error("Error creating pizza: {}", e.getMessage(), e);
             throw e;
         }
     }
 
-    public Optional<Pizza> getPizzaById(Long id) {
+    public Optional<PizzaDTO> getPizzaById(Long id) {
         try {
-            return pizzaRepository.findById(id);
+            Optional<Pizza> pizzaOpt = pizzaRepository.findById(id);
+            return pizzaOpt.map(PizzaDTO::fromEntity);
         } catch (Exception e) {
             logger.error("Error retrieving pizza with ID {}: {}", id, e.getMessage(), e);
             throw e;
         }
     }
 
-    public Optional<Pizza> updatePizza(Long id, Pizza updatedPizza) {
+    public Optional<PizzaDTO> updatePizza(Long id, Pizza updatedPizza) {
         try {
             Optional<Pizza> existingPizzaOpt = pizzaRepository.findById(id);
 
@@ -47,7 +51,7 @@ public class PizzaService {
                 existingPizza.setDescription(updatedPizza.getDescription());
                 existingPizza.setPizza_price(updatedPizza.getPizza_price());
 
-                return Optional.of(pizzaRepository.save(existingPizza));
+                return Optional.of(PizzaDTO.fromEntity(pizzaRepository.save(existingPizza)));
             } else {
                 return Optional.empty();
             }
@@ -71,7 +75,9 @@ public class PizzaService {
         }
     }
 
-    public List<Pizza> getAllPizzas() {
-        return pizzaRepository.findAll();
+    public List<PizzaDTO> getAllPizzas() {
+        return pizzaRepository.findAll().stream()
+                .map(PizzaDTO::fromEntity)
+                .collect(Collectors.toList());
     }
 }
