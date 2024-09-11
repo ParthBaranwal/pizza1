@@ -1,0 +1,764 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /users/{id}:
+    get:
+      tags:
+        - user-controller
+      operationId: getUserById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/User'
+    put:
+      tags:
+        - user-controller
+      operationId: updateUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/User'
+    delete:
+      tags:
+        - user-controller
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /toppings/{id}:
+    get:
+      tags:
+        - topping-controller
+      operationId: getToppingById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Topping'
+    put:
+      tags:
+        - topping-controller
+      operationId: updateTopping
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Topping'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Topping'
+    delete:
+      tags:
+        - topping-controller
+      operationId: deleteTopping
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /sides/{id}:
+    get:
+      tags:
+        - sides-controller
+      operationId: getSidesById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Sides'
+    put:
+      tags:
+        - sides-controller
+      operationId: updateSides
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sides'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Sides'
+    delete:
+      tags:
+        - sides-controller
+      operationId: deleteSides
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /beverages/{id}:
+    get:
+      tags:
+        - beverage-controller
+      operationId: getBeverageById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Beverage'
+    put:
+      tags:
+        - beverage-controller
+      operationId: updateBeverage
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Beverage'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Beverage'
+    delete:
+      tags:
+        - beverage-controller
+      operationId: deleteBeverage
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /users/register:
+    post:
+      tags:
+        - user-controller
+      operationId: registerUser
+      parameters:
+        - name: username
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /toppings:
+    get:
+      tags:
+        - topping-controller
+      operationId: getAllUToppings
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Topping'
+    post:
+      tags:
+        - topping-controller
+      operationId: createTopping
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Topping'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Topping'
+  /sides:
+    get:
+      tags:
+        - sides-controller
+      operationId: getAllSides
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sides'
+    post:
+      tags:
+        - sides-controller
+      operationId: createSides
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sides'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Sides'
+  /pizzas:
+    get:
+      tags:
+        - pizza-controller
+      operationId: getAllPizzas
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+    post:
+      tags:
+        - pizza-controller
+      operationId: createPizza
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pizza'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+  /payments/process:
+    post:
+      tags:
+        - payment-controller
+      operationId: processPayment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaymentResponse'
+  /orders:
+    post:
+      tags:
+        - order-controller
+      operationId: placeOrder
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: orderItemIds
+          in: query
+          required: true
+          schema:
+            uniqueItems: true
+            type: array
+            items:
+              type: integer
+              format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Order'
+  /order-items:
+    post:
+      tags:
+        - order-item-controller
+      operationId: createOrderItem
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: pizzaId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: pizzaQuantity
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: sidesId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: sidesQuantity
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: beverageId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: beverageQuantity
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: toppingIds
+          in: query
+          required: false
+          schema:
+            uniqueItems: true
+            type: array
+            items:
+              type: integer
+              format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /order-items/{orderItemId}/set-size-crust:
+    post:
+      tags:
+        - order-item-controller
+      operationId: setSizeAndCrust
+      parameters:
+        - name: orderItemId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: size
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - SMALL
+              - MEDIUM
+              - LARGE
+        - name: crust
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - THIN
+              - PAN
+              - HANDTOSSED
+              - CHEESEBURST
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /beverages:
+    get:
+      tags:
+        - beverage-controller
+      operationId: getAllBeverages
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Beverage'
+    post:
+      tags:
+        - beverage-controller
+      operationId: createBeverage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Beverage'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Beverage'
+  /users:
+    get:
+      tags:
+        - user-controller
+      operationId: getAllUser
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+  /order-items/{id}:
+    get:
+      tags:
+        - order-item-controller
+      operationId: getOrderItemById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /items:
+    get:
+      tags:
+        - item-controller
+      operationId: getAllItems
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ItemDTO'
+  /pizzas/{id}:
+    delete:
+      tags:
+        - pizza-controller
+      operationId: deletePizza
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        email:
+          type: string
+        phno:
+          type: string
+        password:
+          type: string
+    Topping:
+      type: object
+      properties:
+        t_id:
+          type: integer
+          format: int64
+        top_name:
+          type: string
+        top_price:
+          type: number
+    Sides:
+      type: object
+      properties:
+        s_id:
+          type: integer
+          format: int64
+        s_name:
+          type: string
+        s_price:
+          type: number
+        s_desc:
+          type: string
+    Beverage:
+      type: object
+      properties:
+        b_id:
+          type: integer
+          format: int64
+        b_name:
+          type: string
+        b_price:
+          type: number
+        b_desc:
+          type: string
+    Pizza:
+      type: object
+      properties:
+        p_id:
+          type: integer
+          format: int64
+        pizza_name:
+          type: string
+        description:
+          type: string
+        pizza_price:
+          type: number
+        size:
+          type: string
+          enum:
+            - SMALL
+            - MEDIUM
+            - LARGE
+        crust:
+          type: string
+          enum:
+            - THIN
+            - PAN
+            - HANDTOSSED
+            - CHEESEBURST
+    PaymentRequest:
+      type: object
+      properties:
+        cardNumber:
+          type: string
+        cvv:
+          type: string
+        expiryDate:
+          type: string
+        nameOnCard:
+          type: string
+        orderId:
+          type: string
+    PaymentResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    Order:
+      type: object
+      properties:
+        o_id:
+          type: integer
+          format: int64
+        total_amount:
+          type: integer
+          format: int32
+        order_date:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+            - PENDING
+            - IN_PROGRESS
+            - DELIVERED
+        user:
+          $ref: '#/components/schemas/User'
+        order_items:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Order_Item'
+    Order_Item:
+      type: object
+      properties:
+        oi_id:
+          type: integer
+          format: int64
+        user:
+          $ref: '#/components/schemas/User'
+        pizza:
+          $ref: '#/components/schemas/Pizza'
+        sides:
+          $ref: '#/components/schemas/Sides'
+        beverage:
+          $ref: '#/components/schemas/Beverage'
+        order:
+          $ref: '#/components/schemas/Order'
+        toppings:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Topping'
+        pizzaQuantity:
+          type: integer
+          format: int32
+        sidesQuantity:
+          type: integer
+          format: int32
+        beverageQuantity:
+          type: integer
+          format: int32
+        oi_price:
+          type: number
+    ItemDTO:
+      type: object
+      properties:
+        pizzas:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pizza'
+        toppings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Topping'
+        sides:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sides'
+        beverages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Beverage'
