@@ -31,7 +31,7 @@ public class OrderItemService {
     @Autowired
     private UserRepository userRepository;
 
-    public Order_Item createOrderItem(Long userId, Long pizzaId, Set<Long> toppingIds, int quantity, Long sidesId, Long beverageId) {
+    public Order_Item createOrderItem(Long userId, Long pizzaId, Set<Long> toppingIds, int pizzaQuantity, Long sidesId, int sidesQuantity, Long beverageId, int beverageQuantity) {
         if (userId == null || pizzaId == null) {
             throw new IllegalArgumentException("User ID and Pizza ID must not be null");
         }
@@ -55,9 +55,11 @@ public class OrderItemService {
         // Set the order item fields
         orderItem.setUser(user);
         orderItem.setPizza(pizza);
-        orderItem.setQuantity(quantity);
+        orderItem.setPizzaQuantity(pizzaQuantity);
         orderItem.setSides(sides);
-        orderItem.setBeverage(beverage); // Ensure this is properly set, or handle null if acceptable
+        orderItem.setSidesQuantity(sidesQuantity);
+        orderItem.setBeverage(beverage);
+        orderItem.setBeverageQuantity(beverageQuantity);
         orderItem.setToppings(toppings);
 
         // Calculate the price
@@ -93,13 +95,13 @@ public class OrderItemService {
         BigDecimal totalPrice = BigDecimal.ZERO;
 
         if (orderItem.getPizza() != null) {
-            totalPrice = totalPrice.add(orderItem.getPizza().getPizza_price());
+            totalPrice = totalPrice.add(orderItem.getPizza().getPizza_price().multiply(BigDecimal.valueOf(orderItem.getPizzaQuantity())));
         }
         if (orderItem.getBeverage() != null) {
-            totalPrice = totalPrice.add(orderItem.getBeverage().getB_price());
+            totalPrice = totalPrice.add(orderItem.getBeverage().getB_price().multiply(BigDecimal.valueOf(orderItem.getBeverageQuantity())));
         }
         if (orderItem.getSides() != null) {
-            totalPrice = totalPrice.add(orderItem.getSides().getS_price());
+            totalPrice = totalPrice.add(orderItem.getSides().getS_price().multiply(BigDecimal.valueOf(orderItem.getSidesQuantity())));
         }
         if (orderItem.getToppings() != null) {
             for (Topping topping : orderItem.getToppings()) {
@@ -107,6 +109,6 @@ public class OrderItemService {
             }
         }
 
-        orderItem.setOi_price(totalPrice.multiply(BigDecimal.valueOf(orderItem.getQuantity())));
+        orderItem.setOi_price(totalPrice);
     }
 }

@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
+@Table(name = "or_item")
 public class Order_Item {
 
     @Id
@@ -26,6 +27,7 @@ public class Order_Item {
     @ManyToOne
     @JoinColumn(name = "beverage_id")
     private Beverage beverage;
+
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
@@ -38,18 +40,13 @@ public class Order_Item {
     )
     private Set<Topping> toppings;
 
-    private int quantity;
+    private int pizzaQuantity; // New field for Pizza quantity
+    private int sidesQuantity; // New field for Sides quantity
+    private int beverageQuantity; // New field for Beverage quantity
+
     private BigDecimal oi_price;
 
     // Getters and setters
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
 
     public Long getOi_id() {
         return oi_id;
@@ -59,20 +56,20 @@ public class Order_Item {
         this.oi_id = oi_id;
     }
 
-    public Pizza getPizza() {
-        return pizza;
-    }
-
-    public void setPizza(Pizza pizza) {
-        this.pizza = pizza;
-    }
-
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Pizza getPizza() {
+        return pizza;
+    }
+
+    public void setPizza(Pizza pizza) {
+        this.pizza = pizza;
     }
 
     public Sides getSides() {
@@ -91,6 +88,14 @@ public class Order_Item {
         this.beverage = beverage;
     }
 
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
     public Set<Topping> getToppings() {
         return toppings;
     }
@@ -99,12 +104,28 @@ public class Order_Item {
         this.toppings = toppings;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getPizzaQuantity() {
+        return pizzaQuantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setPizzaQuantity(int pizzaQuantity) {
+        this.pizzaQuantity = pizzaQuantity;
+    }
+
+    public int getSidesQuantity() {
+        return sidesQuantity;
+    }
+
+    public void setSidesQuantity(int sidesQuantity) {
+        this.sidesQuantity = sidesQuantity;
+    }
+
+    public int getBeverageQuantity() {
+        return beverageQuantity;
+    }
+
+    public void setBeverageQuantity(int beverageQuantity) {
+        this.beverageQuantity = beverageQuantity;
     }
 
     public BigDecimal getOi_price() {

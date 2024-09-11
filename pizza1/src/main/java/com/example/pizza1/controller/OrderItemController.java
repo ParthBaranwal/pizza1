@@ -21,13 +21,15 @@ public class OrderItemController {
     public ResponseEntity<?> createOrderItem(
             @RequestParam Long userId,
             @RequestParam Long pizzaId,
+            @RequestParam int pizzaQuantity,
             @RequestParam(required = false) Long sidesId,
+            @RequestParam(required = false) Integer sidesQuantity,
             @RequestParam(required = false) Long beverageId,
-            @RequestParam(required = false) Set<Long> toppingIds,
-            @RequestParam int quantity) {
+            @RequestParam(required = false) Integer beverageQuantity,
+            @RequestParam(required = false) Set<Long> toppingIds) {
 
         try {
-            Order_Item orderItem = orderItemService.createOrderItem(userId, pizzaId, toppingIds, quantity, sidesId, beverageId);
+            Order_Item orderItem = orderItemService.createOrderItem(userId, pizzaId, toppingIds, pizzaQuantity, sidesId, sidesQuantity, beverageId, beverageQuantity);
             return ResponseEntity.ok(orderItem);
         } catch (Exception e) {
             e.printStackTrace();
